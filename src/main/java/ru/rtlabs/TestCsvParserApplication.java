@@ -12,7 +12,7 @@ import java.io.IOException;
 public class TestCsvParserApplication {
 
 	public static void main(String[] args) throws IOException {
-		//SpringApplication.run(TestCsvParserApplication.class, args);
+
 		ApplicationContext app = SpringApplication.run(TestCsvParserApplication.class, args);
 		JdbcTemplate jdbcTemplate = app.getBean(JdbcTemplate.class);
 		SqlRowSet rs = jdbcTemplate.queryForRowSet("select 10000 a");
