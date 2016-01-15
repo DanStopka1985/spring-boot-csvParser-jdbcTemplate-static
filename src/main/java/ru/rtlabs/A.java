@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by Stepan Danilov on 31.12.2015.
  */
-@Repository
+//@Repository
 @Component
 public class A {
 //    @Autowired
@@ -59,7 +59,15 @@ public class A {
             System.out.println("jdbcTemplate is null");
         }
 
-        jdbcTemplate.queryForRowSet("select 1");
+        SqlRowSet rs = jdbcTemplate.queryForRowSet("select 090909090 a");
+
+        while (rs.next()){
+            System.out.println(rs.getString("a"));
+
+        }
+
+
+
 //        SqlRowSet rs = jt.queryForRowSet("SELECT 154000000000 a ");
 //        while (rs.next()){
 //            System.out.println(rs.getString("a"));
