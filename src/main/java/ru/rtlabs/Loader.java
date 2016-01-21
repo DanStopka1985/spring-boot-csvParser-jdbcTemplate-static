@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -59,7 +60,7 @@ public class Loader {
         }
     }
 
-    public void xlsTempWork() throws IOException, InvalidFormatException {
+    public void xlsTempWork() throws IOException, InvalidFormatException, URISyntaxException {
 //        FileInputStream file = new FileInputStream(new File("d:\\projects\\loaders\\loader_little_files\\src\\x.xlsx"));
 //
 //        //Get the workbook instance for XLS file
@@ -105,6 +106,7 @@ public class Loader {
         FileOutputStream fileOut = new FileOutputStream("d:\\projects\\loaders\\loader_little_files\\src\\фарм.гр.xls");
         wb.write(fileOut);
         fileOut.close();
+
 
 
     }
