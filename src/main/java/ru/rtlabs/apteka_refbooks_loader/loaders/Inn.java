@@ -30,10 +30,7 @@ public class Inn {
     private String createSQLPath;
     private String normilizeSQLPath;
     private String loadToRMISSQLPath;
-
     private Connection con;
-
-
 
     public void create() throws SQLException {
         String jarPath = System.getProperty("user.dir");
@@ -48,7 +45,6 @@ public class Inn {
         this.con = ds.getConnection();
 
         ScriptUtils.executeSqlScript(con, new FileSystemResource(createSQLPath));
-
     }
 
     public void loadSrc() throws IOException, InvalidFormatException, SQLException {

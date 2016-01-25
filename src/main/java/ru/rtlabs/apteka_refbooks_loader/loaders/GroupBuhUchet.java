@@ -68,28 +68,25 @@ public class GroupBuhUchet {
     }
 
     public boolean isValid(){
-        System.out.println("Проверяется МНН..");
+        System.out.println("Проверяется справочник группы бух. учета..");
         boolean isValid = true;
-        SqlRowSet rs = jt.queryForRowSet("select * from public.loader_little_files_gr_buh_uch where name_rus is null;");
+        SqlRowSet rs = jt.queryForRowSet("select * from public.loader_little_files_gr_buh_uch where name is null;");
         while (rs.next()){
             isValid = false;
-            System.out.println("Проверка МНН, поле name_rus обязательное, но не заполнено, code:" + rs.getString("code") + " name_latin:" + rs.getString("name_latin"));
+            System.out.println("Проверка справочника группы бух. учета, поле name обязательное, но не заполнено ");
+            rs = jt.queryForRowSet("select count(1) cnt from public.loader_little_files_gr_buh_uch where name is null;");
+            System.out.println("не заполнено " + rs.getString("cnt") + "шт.");
+            break;
         }
 
-        rs = jt.queryForRowSet("select * from public.loader_little_files_mnn where name_latin is null;");
+        rs = jt.queryForRowSet("select name, count(1) cnt from public.loader_little_files_gr_buh_uch group by name having count(1) > 1;");
         while (rs.next()){
             isValid = false;
-            System.out.println("Проверка МНН, поле name_latin обязательное, но не заполнено, code:" + rs.getString("code") + " name_rus:" + rs.getString("name_rus"));
+            System.out.println("Проверка справочника группы бух. учета, поле name должно быть уникально, но обнаружены дубли, codes:" + rs.getString("name") + " - " + rs.getString("cnt") + " шт.");
         }
 
-        rs = jt.queryForRowSet("select name_rus, count(1) cnt, array_to_string(array_agg( distinct code), ', ' ) codes from public.loader_little_files_mnn group by name_rus having count(1) > 1;");
-        while (rs.next()){
-            isValid = false;
-            System.out.println("Проверка МНН, поле name_rus должно быть уникально, но обнаружены дубли, codes:" + rs.getString("codes") + " - " + rs.getString("cnt") + " шт.");
-        }
-
-        if (isValid) System.out.println("МНН валидный");
-        else System.out.println("МНН невалидный");
+        if (isValid) System.out.println("справочник группы бух. учета валидный");
+        else System.out.println("справочник группы бух. учета невалидный");
 
         return isValid;
     }
