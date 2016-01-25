@@ -68,6 +68,7 @@ public class Inn {
     }
 
     public boolean isValid(){
+        System.out.println("Проверяется МНН..");
         boolean isValid = true;
         SqlRowSet rs = jt.queryForRowSet("select * from public.loader_little_files_mnn where name_rus is null;");
         while (rs.next()){
