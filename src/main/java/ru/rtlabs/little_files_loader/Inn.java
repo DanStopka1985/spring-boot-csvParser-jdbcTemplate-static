@@ -29,6 +29,7 @@ public class Inn {
 
     private String innPath;
     private String createSQLPath;
+    private String normilizeSQLPath;
     private Connection con;
 
 
@@ -40,6 +41,8 @@ public class Inn {
 
         this.innPath = xlsPath + "/мнн.xls";
         this.createSQLPath = sqlPath + "/inn_src_create.sql";
+        this.normilizeSQLPath = sqlPath + "/inn_src_normalize.sql";
+
         this.con = ds.getConnection();
 
         ScriptUtils.executeSqlScript(con, new FileSystemResource(createSQLPath));
@@ -85,6 +88,11 @@ public class Inn {
         else System.out.println("МНН невалидный");
 
         return isValid;
+    }
+
+    public void normalize(){
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+
     }
 
 }

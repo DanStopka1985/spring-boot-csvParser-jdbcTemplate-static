@@ -90,7 +90,9 @@ public class Loader {
     public void execute() throws InvalidFormatException, SQLException, IOException {
         inn.create();
         inn.loadSrc();
-        System.out.println("inn is valid:" + inn.isValid());
+        inn.isValid();
+        inn.normalize();
+        inn.isValid();
     }
 
 
