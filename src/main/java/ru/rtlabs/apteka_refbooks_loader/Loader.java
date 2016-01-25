@@ -50,6 +50,7 @@ public class Loader {
 
         pharmGroup.create();
         pharmGroup.loadSrc();
+        pharmGroup.isValid();
 
 
     }

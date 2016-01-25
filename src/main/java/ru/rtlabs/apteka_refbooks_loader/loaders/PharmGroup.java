@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -70,5 +71,42 @@ public class PharmGroup {
         }
 
         jt.update("update public.loader_little_files_pharm_group set uid = substring(uid, 0, length(uid) - 1) where uid ~ '.0$'");
+    }
+
+    public boolean isValid(){
+        System.out.println("Проверяется справочник фарм груп..");
+        boolean isValid = true;
+        SqlRowSet rs = jt.queryForRowSet("select * from public.loader_little_files_pharm_group where name is null;");
+        if (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника фарм груп, поле name обязательное, но не заполнено ");
+            rs = jt.queryForRowSet("select count(1) cnt from public.loader_little_files_pharm_group where name is null;");
+            System.out.println("не заполнено " + rs.getString("cnt") + "шт.");
+        }
+
+        rs = jt.queryForRowSet("select * from public.loader_little_files_pharm_group where uid is null;");
+        if (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника фарм груп, поле uid обязательное, но не заполнено ");
+            rs = jt.queryForRowSet("select count(1) cnt from public.loader_little_files_pharm_group where uid is null;");
+            System.out.println("не заполнено " + rs.getString("cnt") + "шт.");
+        }
+
+        rs = jt.queryForRowSet("select name, count(1) cnt from public.loader_little_files_pharm_group group by name having count(1) > 1;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника фарм груп, поле name должно быть уникально, но обнаружены дубли:" + rs.getString("name") + " - " + rs.getString("cnt") + " шт.");
+        }
+
+        rs = jt.queryForRowSet("select uid, count(1) cnt from public.loader_little_files_pharm_group group by uid having count(1) > 1;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника фарм груп, поле uid должно быть уникально, но обнаружены дубли:" + rs.getString("uid") + " - " + rs.getString("cnt") + " шт.");
+        }
+
+        if (isValid) System.out.println("справочник фарм груп валидный");
+        else System.out.println("справочник фарм груп невалидный");
+
+        return isValid;
     }
 }
