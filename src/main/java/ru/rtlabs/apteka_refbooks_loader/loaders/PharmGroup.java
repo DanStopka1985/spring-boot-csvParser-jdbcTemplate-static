@@ -66,9 +66,9 @@ public class PharmGroup {
                     jt.update("insert into public.loader_little_files_pharm_group(name, uid) values(?, ?)",
                             row.getCell(0).getStringCellValue(), String.valueOf(row.getCell(1).getNumericCellValue()));
                     break;
-
-
             }
         }
+
+        jt.update("update public.loader_little_files_pharm_group set uid = substring(uid, 0, length(uid) - 1) where uid ~ '.0$'");
     }
 }
