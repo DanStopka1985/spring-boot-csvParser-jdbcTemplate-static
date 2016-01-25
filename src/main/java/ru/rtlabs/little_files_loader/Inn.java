@@ -66,8 +66,23 @@ public class Inn {
         SqlRowSet rs = jt.queryForRowSet("select * from public.loader_little_files_mnn where name_rus is null;");
         while (rs.next()){
             isValid = false;
-            System.out.println("Проверка МНН, полу name_rus обязательное, но заполнено, code:" + rs.getString("code") + " name_latin:" + rs.getString("name_latin"));
+            System.out.println("Проверка МНН, поле name_rus обязательное, но не заполнено, code:" + rs.getString("code") + " name_latin:" + rs.getString("name_latin"));
         }
+
+        rs = jt.queryForRowSet("select * from public.loader_little_files_mnn where name_latin is null;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка МНН, поле name_latin обязательное, но не заполнено, code:" + rs.getString("code") + " name_rus:" + rs.getString("name_rus"));
+        }
+
+        rs = jt.queryForRowSet("select name_rus, count(1) cnt, array_to_string(array_agg( distinct code), ', ' ) codes from public.loader_little_files_mnn group by name_rus having count(1) > 1;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка МНН, поле name_rus должно быть уникально, но обнаружены дубли, codes:" + rs.getString("codes") + " - " + rs.getString("cnt") + " шт.");
+        }
+
+        if (isValid) System.out.println("МНН валидный");
+        else System.out.println("МНН невалидный");
 
         return isValid;
     }
