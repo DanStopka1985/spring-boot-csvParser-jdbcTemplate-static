@@ -31,6 +31,10 @@ public class Loader {
 
         groupBuhUchet.create();
         groupBuhUchet.loadSrc();
+        groupBuhUchet.isValid();
+        groupBuhUchet.normalize();
+        groupBuhUchet.isValid();
+        groupBuhUchet.loadToRmis();
 
     }
 

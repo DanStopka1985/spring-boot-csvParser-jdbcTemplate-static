@@ -63,7 +63,7 @@ public class GroupBuhUchet {
         for (int i = 1; i < rowCnt; i++){
             Row row = sheet.getRow(i);
             jt.update("insert into public.loader_little_files_gr_buh_uch(name) values(?)",
-                    new Object[]{row.getCell(1).getStringCellValue()});
+                    row.getCell(1).getStringCellValue());
         }
     }
 
@@ -82,13 +82,23 @@ public class GroupBuhUchet {
         rs = jt.queryForRowSet("select name, count(1) cnt from public.loader_little_files_gr_buh_uch group by name having count(1) > 1;");
         while (rs.next()){
             isValid = false;
-            System.out.println("Проверка справочника группы бух. учета, поле name должно быть уникально, но обнаружены дубли, codes:" + rs.getString("name") + " - " + rs.getString("cnt") + " шт.");
+            System.out.println("Проверка справочника группы бух. учета, поле name должно быть уникально, но обнаружены дубли:" + rs.getString("name") + " - " + rs.getString("cnt") + " шт.");
         }
 
         if (isValid) System.out.println("справочник группы бух. учета валидный");
         else System.out.println("справочник группы бух. учета невалидный");
 
         return isValid;
+    }
+
+    public void normalize(){
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+    }
+
+    public void loadToRmis(){
+        System.out.println("Загружаентся справочник группы бух. учета..");
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(loadToRMISSQLPath));
+        System.out.println("справочник группы бух. учета загружен!");
     }
 
 }
