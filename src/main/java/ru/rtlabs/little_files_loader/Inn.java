@@ -30,6 +30,8 @@ public class Inn {
     private String innPath;
     private String createSQLPath;
     private String normilizeSQLPath;
+    private String loadToRMISSQLPath;
+
     private Connection con;
 
 
@@ -42,6 +44,7 @@ public class Inn {
         this.innPath = xlsPath + "/мнн.xls";
         this.createSQLPath = sqlPath + "/inn_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/inn_src_normalize.sql";
+        this.loadToRMISSQLPath = sqlPath + "/inn_load_to_rmis.sql";
 
         this.con = ds.getConnection();
 
@@ -92,7 +95,13 @@ public class Inn {
 
     public void normalize(){
         ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
-
     }
+
+    public void loadToRmis(){
+        System.out.println("Загружаентся МНН..");
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(loadToRMISSQLPath));
+        System.out.println("МНН загружен!");
+    }
+
 
 }

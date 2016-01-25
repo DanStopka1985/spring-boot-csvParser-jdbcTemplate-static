@@ -93,6 +93,7 @@ public class Loader {
         inn.isValid();
         inn.normalize();
         inn.isValid();
+        inn.loadToRmis();
     }
 
 
