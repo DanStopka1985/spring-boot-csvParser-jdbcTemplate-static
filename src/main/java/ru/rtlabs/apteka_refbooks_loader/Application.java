@@ -1,15 +1,13 @@
-package ru.rtlabs;
+package ru.rtlabs.apteka_refbooks_loader;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import ru.rtlabs.little_files_loader.Inn;
 
 import java.io.IOException;
 
-import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 @SpringBootApplication

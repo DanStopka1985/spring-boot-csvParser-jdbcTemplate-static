@@ -1,4 +1,4 @@
-package ru.rtlabs.little_files_loader;
+package ru.rtlabs.apteka_refbooks_loader.loaders;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

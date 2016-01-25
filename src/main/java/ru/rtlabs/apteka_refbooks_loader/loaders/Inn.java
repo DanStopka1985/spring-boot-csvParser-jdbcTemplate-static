@@ -1,4 +1,4 @@
-package ru.rtlabs.little_files_loader;
+package ru.rtlabs.apteka_refbooks_loader.loaders;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
