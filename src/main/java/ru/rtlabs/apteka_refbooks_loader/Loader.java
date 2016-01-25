@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ru.rtlabs.apteka_refbooks_loader.loaders.Ath;
 import ru.rtlabs.apteka_refbooks_loader.loaders.GroupBuhUchet;
 import ru.rtlabs.apteka_refbooks_loader.loaders.Inn;
+import ru.rtlabs.apteka_refbooks_loader.loaders.PharmGroup;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -23,6 +24,8 @@ public class Loader {
     GroupBuhUchet groupBuhUchet;
     @Autowired
     Ath ath;
+    @Autowired
+    PharmGroup pharmGroup;
 
     public void execute() throws InvalidFormatException, SQLException, IOException {
 //        inn.create();
@@ -39,11 +42,14 @@ public class Loader {
 //        groupBuhUchet.isValid();
 //        groupBuhUchet.loadToRmis();
 
-        ath.create();
-        ath.loadSrc();
-        ath.isValid();
-        ath.normalize();
-        ath.loadToRmis();
+//        ath.create();
+//        ath.loadSrc();
+//        ath.isValid();
+//        ath.normalize();
+//        ath.loadToRmis();
+
+        pharmGroup.create();
+        pharmGroup.loadSrc();
 
 
     }
