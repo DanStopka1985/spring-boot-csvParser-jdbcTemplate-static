@@ -92,7 +92,9 @@ public class GroupBuhUchet {
     }
 
     public void normalize(){
+        System.out.println("группы бух учета - нормализация..");
         ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+        System.out.println("группы бух учета -  нормализован");
     }
 
     public void loadToRmis(){

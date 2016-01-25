@@ -90,7 +90,9 @@ public class Inn {
     }
 
     public void normalize(){
+        System.out.println("МНН нормализация..");
         ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+        System.out.println("МНН нормализован");
     }
 
     public void loadToRmis(){
