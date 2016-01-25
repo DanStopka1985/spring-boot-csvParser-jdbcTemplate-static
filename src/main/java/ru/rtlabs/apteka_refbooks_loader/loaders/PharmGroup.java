@@ -107,6 +107,18 @@ public class PharmGroup {
         if (isValid) System.out.println("справочник фарм груп валидный");
         else System.out.println("справочник фарм груп невалидный");
 
+        //normalize there, because next checks needed
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+
+        //todo next checks
+
         return isValid;
     }
+
+    public void normalize(){
+        System.out.println("справочник фарм груп - нормализация..");
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+        System.out.println("справочник фарм груп -  нормализован");
+    }
+
 }
