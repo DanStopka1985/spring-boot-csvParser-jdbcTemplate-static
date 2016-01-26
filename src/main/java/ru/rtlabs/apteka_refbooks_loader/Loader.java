@@ -26,33 +26,59 @@ public class Loader {
     @Autowired
     FormType formType;
 
-    public void execute() throws InvalidFormatException, SQLException, IOException {
+    public void execute(String p) throws InvalidFormatException, SQLException, IOException {
 
-        //System.out.println(inn.exists());
+        boolean ignore = false;
+        if ("i".equals(p)){
+            ignore = true;
+            System.out.println("\nВЫБРАНО - ИГНОРИРОВАТЬ ДУБЛИ!\n");
+        }
 
-//        inn.loadSrc();
-//        inn.isValid();
-//        inn.normalize();
-//        inn.isValid();
-//        inn.loadToRmis();
-//
-//        groupBuhUchet.create();
-//        groupBuhUchet.loadSrc();
-//        groupBuhUchet.isValid();
-//        groupBuhUchet.normalize();
-//        groupBuhUchet.isValid();
-//        groupBuhUchet.loadToRmis();
-//
-//        ath.create();
-//        ath.loadSrc();
-//        ath.isValid();
-//        ath.normalize();
-//        ath.loadToRmis();
-//
-//        pharmGroup.create();
-//        pharmGroup.loadSrc();
-//        pharmGroup.isValid();
-//        pharmGroup.loadToRmis();
+        if (inn.exists()){
+            inn.create();
+            inn.loadSrc();
+            if (inn.isValid() || ignore){
+                inn.normalize();
+                inn.loadToRmis();
+            }
+        }
+
+        if (ath.exists()){
+            ath.create();
+            ath.loadSrc();
+            if (ath.isValid() || ignore){
+                ath.normalize();
+                ath.loadToRmis();
+            }
+        }
+
+        if (groupBuhUchet.exists()){
+            groupBuhUchet.create();
+            groupBuhUchet.loadSrc();
+            if (groupBuhUchet.isValid() || ignore){
+                groupBuhUchet.normalize();
+                groupBuhUchet.loadToRmis();
+            }
+        }
+
+        if (pharmGroup.exists()){
+            pharmGroup.create();
+            pharmGroup.loadSrc();
+            if (pharmGroup.isValid() || ignore){
+                pharmGroup.normalize();
+                pharmGroup.loadToRmis();
+            }
+        }
+
+        if (formType.exists()){
+            formType.create();
+            formType.loadSrc();
+            if (formType.isValid() || ignore){
+                formType.normalize();
+                formType.loadToRmis();
+            }
+        }
+
 
         if (formType.exists()){
             formType.create();
@@ -61,6 +87,7 @@ public class Loader {
         }
 
 
+        System.out.println("ЗАГРУЗКА ЗАВЕРШЕНА!");
     }
 
 
