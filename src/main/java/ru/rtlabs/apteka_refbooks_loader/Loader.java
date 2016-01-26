@@ -57,6 +57,7 @@ public class Loader {
         if (formType.exists()){
             formType.create();
             formType.loadSrc();
+            formType.isValid();
         }
 
 

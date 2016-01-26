@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -69,5 +70,50 @@ public class FormType {
                         row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue());
 
         }
+    }
+
+    public boolean isValid(){
+        System.out.println("Проверяется справочник form_type..");
+        boolean isValid = true;
+        SqlRowSet rs = jt.queryForRowSet("select * from public.loader_little_files_form_type where short_name is null;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника form_type, поле короткое наименование обязательное, но не заполнено ");
+            rs = jt.queryForRowSet("select count(1) cnt from public.loader_little_files_form_type where short_name is null;");
+            System.out.println("не заполнено " + rs.getString("cnt") + "шт.");
+            break;
+        }
+
+        rs = jt.queryForRowSet("select * from public.loader_little_files_form_type where full_name is null;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника form_type, поле полное наименование обязательное, но не заполнено ");
+            rs = jt.queryForRowSet("select count(1) cnt from public.loader_little_files_form_type where full_name is null;");
+            System.out.println("не заполнено " + rs.getString("cnt") + "шт.");
+            break;
+        }
+
+        rs = jt.queryForRowSet("select short_name, count(1) cnt from public.loader_little_files_form_type group by short_name having count(1) > 1;");
+        while (rs.next()){
+            isValid = false;
+            System.out.println("Проверка справочника form_type, поле short_name должно быть уникально, но обнаружены дубли:" + rs.getString("short_name") + " - " + rs.getString("cnt") + " шт.");
+        }
+
+        if (isValid) System.out.println("справочник form_type валидный");
+        else System.out.println("справочник form_type невалидный");
+
+        return isValid;
+    }
+
+    public void normalize(){
+        System.out.println("form_type нормализация..");
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(normilizeSQLPath));
+        System.out.println("form_type нормализован");
+    }
+
+    public void loadToRmis(){
+        System.out.println("Загружаентся справочник form_type..");
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(loadToRMISSQLPath));
+        System.out.println("справочник form_type загружен!");
     }
 }
