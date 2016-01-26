@@ -41,7 +41,7 @@ public class Ath {
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.AthPath = xlsPath + "/атх.xls";
+        this.AthPath = xlsPath + "/atc.xlsx";
         this.createSQLPath = sqlPath + "/ath_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/ath_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/ath_load_to_rmis.sql";

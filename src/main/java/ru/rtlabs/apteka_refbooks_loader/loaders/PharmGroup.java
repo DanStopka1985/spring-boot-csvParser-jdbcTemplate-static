@@ -38,7 +38,7 @@ public class PharmGroup {
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.PharmGroupPath = xlsPath + "/фарм+группы+нов.xlsx";
+        this.PharmGroupPath = xlsPath + "/pharm_group.xlsx";
         this.createSQLPath = sqlPath + "/pharm_group_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/pharm_group_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/pharm_group_load_to_rmis.sql";

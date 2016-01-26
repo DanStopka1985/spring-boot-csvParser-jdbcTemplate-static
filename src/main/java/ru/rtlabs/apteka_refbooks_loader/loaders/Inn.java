@@ -37,7 +37,7 @@ public class Inn {
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.innPath = xlsPath + "/мнн.xls";
+        this.innPath = xlsPath + "/inn.xlsx";
         this.createSQLPath = sqlPath + "/inn_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/inn_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/inn_load_to_rmis.sql";

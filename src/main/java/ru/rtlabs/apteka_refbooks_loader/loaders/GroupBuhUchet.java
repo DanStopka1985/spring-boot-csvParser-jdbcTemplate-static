@@ -42,7 +42,7 @@ public class GroupBuhUchet {
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.GrBuhUchPath = xlsPath + "/группы бух учета.xls";
+        this.GrBuhUchPath = xlsPath + "/commodity_group.xlsx";
         this.createSQLPath = sqlPath + "/gr_buh_uch_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/gr_buh_uch_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/gr_buh_uch_load_to_rmis.sql";
