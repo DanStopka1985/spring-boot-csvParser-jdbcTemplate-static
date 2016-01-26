@@ -114,6 +114,6 @@ public class FormType {
     public void loadToRmis(){
         System.out.println("Загружаентся справочник form_type..");
         ScriptUtils.executeSqlScript(con, new FileSystemResource(loadToRMISSQLPath));
-        System.out.println("справочник form_type загружен!");
+        System.out.println("Cправочник form_type загружен!");
     }
 }
