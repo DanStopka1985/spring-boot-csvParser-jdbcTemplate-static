@@ -4,6 +4,7 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.logging.LoggingApplicationListener;
 import org.springframework.context.ApplicationContext;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-@SpringBootApplication
+@SpringBootApplication(exclude={LoggingApplicationListener.class})
 public class Application {
 
 	public static void main(String[] args) throws IOException, InvalidFormatException, SQLException {
@@ -38,7 +39,7 @@ public class Application {
 		else
 			p = "";
 
-		loader.execute(args[0], p);
+		loader.execute(p);
 
 	}
 }

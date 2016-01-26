@@ -40,7 +40,8 @@ public class Loader {
             if (inn.isValid() || ignore){
                 inn.normalize();
                 inn.loadToRmis();
-            }
+            } else
+                System.out.println("\nМНН НЕ ЗАГРУЖЕН\n");
         }
 
         if (ath.exists()){
@@ -49,7 +50,8 @@ public class Loader {
             if (ath.isValid() || ignore){
                 ath.normalize();
                 ath.loadToRmis();
-            }
+            } else
+                System.out.println("\nАТХ НЕ ЗАГРУЖЕН\n");
         }
 
         if (groupBuhUchet.exists()){
@@ -58,7 +60,8 @@ public class Loader {
             if (groupBuhUchet.isValid() || ignore){
                 groupBuhUchet.normalize();
                 groupBuhUchet.loadToRmis();
-            }
+            } else
+                System.out.println("\nСПР. ГРУП БУХ. УЧ. НЕ ЗАГРУЖЕН\n");
         }
 
         if (pharmGroup.exists()){
@@ -67,7 +70,8 @@ public class Loader {
             if (pharmGroup.isValid() || ignore){
                 pharmGroup.normalize();
                 pharmGroup.loadToRmis();
-            }
+            } else
+                System.out.println("\nPHARM_GROUP НЕ ЗАГРУЖЕН\n");
         }
 
         if (formType.exists()){
@@ -76,16 +80,9 @@ public class Loader {
             if (formType.isValid() || ignore){
                 formType.normalize();
                 formType.loadToRmis();
-            }
+            } else
+                System.out.println("\nFORM_TYPE НЕ ЗАГРУЖЕН\n");
         }
-
-
-        if (formType.exists()){
-            formType.create();
-            formType.loadSrc();
-            formType.isValid();
-        }
-
 
         System.out.println("ЗАГРУЗКА ЗАВЕРШЕНА!");
     }
