@@ -22,4 +22,10 @@ from public.loader_little_files_pharm_group a
 ;
 
 update public.loader_little_files_pharm_group1 set parent_uid = null where parent_uid = '';
---todo next normalize
+
+--searching ids and parent ids
+drop table if exists public.loader_little_files_pharm_group;
+
+create table public.loader_little_files_pharm_group as
+select a.*, b.id from public.loader_little_files_pharm_group1 a
+left join inventory.pharm_group b on a.name = b.name;

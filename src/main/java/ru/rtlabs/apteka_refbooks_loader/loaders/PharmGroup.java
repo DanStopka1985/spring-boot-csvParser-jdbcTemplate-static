@@ -121,4 +121,10 @@ public class PharmGroup {
         System.out.println("справочник фарм груп -  нормализован");
     }
 
+    public void loadToRmis(){
+        System.out.println("Загружаентся справочник фарм груп..");
+        ScriptUtils.executeSqlScript(con, new FileSystemResource(loadToRMISSQLPath));
+        System.out.println("справочник фарм груп загружен!");
+    }
+
 }
