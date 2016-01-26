@@ -62,7 +62,7 @@ public class Inn {
         for (int i = 1; i < rowCnt; i++){
             Row row = sheet.getRow(i);
             jt.update("insert into loader_little_files_mnn(name_rus, code, name_latin) values(?, ?, ?)",
-                    new Object[]{row.getCell(0).getStringCellValue(), row.getCell(1).getNumericCellValue(), row.getCell(2).getStringCellValue()});
+                    row.getCell(0).getStringCellValue(), row.getCell(1).getNumericCellValue(), row.getCell(2).getStringCellValue());
         }
     }
 

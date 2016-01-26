@@ -56,7 +56,6 @@ public class Ath {
     }
 
     public void loadSrc() throws IOException, InvalidFormatException, SQLException {
-
         InputStream inp = new FileInputStream(athPath);
         Workbook wb = WorkbookFactory.create(inp);
 

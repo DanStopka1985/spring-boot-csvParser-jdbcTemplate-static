@@ -3,10 +3,7 @@ package ru.rtlabs.apteka_refbooks_loader;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.rtlabs.apteka_refbooks_loader.loaders.Ath;
-import ru.rtlabs.apteka_refbooks_loader.loaders.GroupBuhUchet;
-import ru.rtlabs.apteka_refbooks_loader.loaders.Inn;
-import ru.rtlabs.apteka_refbooks_loader.loaders.PharmGroup;
+import ru.rtlabs.apteka_refbooks_loader.loaders.*;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -26,10 +23,12 @@ public class Loader {
     Ath ath;
     @Autowired
     PharmGroup pharmGroup;
+    @Autowired
+    FormType formType;
 
     public void execute() throws InvalidFormatException, SQLException, IOException {
 
-        System.out.println(inn.exists());
+        //System.out.println(inn.exists());
 
 //        inn.loadSrc();
 //        inn.isValid();
@@ -54,6 +53,11 @@ public class Loader {
 //        pharmGroup.loadSrc();
 //        pharmGroup.isValid();
 //        pharmGroup.loadToRmis();
+
+        if (formType.exists()){
+            formType.create();
+            formType.loadSrc();
+        }
 
 
     }
