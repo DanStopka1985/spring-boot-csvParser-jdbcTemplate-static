@@ -30,31 +30,35 @@ public class GroupBuhUchet {
     @Autowired
     DataSource ds;
 
-    private String GrBuhUchPath;
+    private String grBuhUchPath;
     private String createSQLPath;
     private String normilizeSQLPath;
     private String loadToRMISSQLPath;
 
     private Connection con;
 
-    public void create() throws SQLException {
+    public boolean exists() throws SQLException {
         String jarPath = System.getProperty("user.dir");
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.GrBuhUchPath = xlsPath + "/commodity_group.xlsx";
+        this.grBuhUchPath = xlsPath + "/commodity_group.xlsx";
         this.createSQLPath = sqlPath + "/gr_buh_uch_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/gr_buh_uch_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/gr_buh_uch_load_to_rmis.sql";
 
         this.con = ds.getConnection();
 
+        return (new FileSystemResource(grBuhUchPath)).exists();
+    }
+
+    public void create() throws SQLException {
         ScriptUtils.executeSqlScript(con, new FileSystemResource(createSQLPath));
     }
 
     public void loadSrc() throws IOException, InvalidFormatException, SQLException {
 
-        InputStream inp = new FileInputStream(GrBuhUchPath);
+        InputStream inp = new FileInputStream(grBuhUchPath);
         Workbook wb = WorkbookFactory.create(inp);
 
         Sheet sheet = wb.getSheetAt(0);

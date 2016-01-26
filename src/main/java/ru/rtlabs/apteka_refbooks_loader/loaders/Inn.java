@@ -32,7 +32,7 @@ public class Inn {
     private String loadToRMISSQLPath;
     private Connection con;
 
-    public void create() throws SQLException {
+    public boolean exists() throws SQLException {
         String jarPath = System.getProperty("user.dir");
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
@@ -44,6 +44,10 @@ public class Inn {
 
         this.con = ds.getConnection();
 
+        return (new FileSystemResource(innPath)).exists();
+    }
+
+    public void create() throws SQLException {
         ScriptUtils.executeSqlScript(con, new FileSystemResource(createSQLPath));
     }
 

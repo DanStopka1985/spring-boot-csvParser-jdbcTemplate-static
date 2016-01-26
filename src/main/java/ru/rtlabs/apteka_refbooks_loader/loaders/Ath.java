@@ -29,31 +29,35 @@ public class Ath {
     @Autowired
     DataSource ds;
 
-    private String AthPath;
+    private String athPath;
     private String createSQLPath;
     private String normilizeSQLPath;
     private String loadToRMISSQLPath;
 
     private Connection con;
 
-    public void create() throws SQLException {
+    public boolean exists() throws SQLException {
         String jarPath = System.getProperty("user.dir");
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.AthPath = xlsPath + "/atc.xlsx";
+        this.athPath = xlsPath + "/atc.xlsx";
         this.createSQLPath = sqlPath + "/ath_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/ath_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/ath_load_to_rmis.sql";
 
         this.con = ds.getConnection();
 
+        return (new FileSystemResource(athPath)).exists();
+    }
+
+    public void create() throws SQLException {
         ScriptUtils.executeSqlScript(con, new FileSystemResource(createSQLPath));
     }
 
     public void loadSrc() throws IOException, InvalidFormatException, SQLException {
 
-        InputStream inp = new FileInputStream(AthPath);
+        InputStream inp = new FileInputStream(athPath);
         Workbook wb = WorkbookFactory.create(inp);
 
         Sheet sheet = wb.getSheetAt(0);

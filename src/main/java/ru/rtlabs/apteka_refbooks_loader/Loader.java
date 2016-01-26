@@ -28,30 +28,32 @@ public class Loader {
     PharmGroup pharmGroup;
 
     public void execute() throws InvalidFormatException, SQLException, IOException {
-        inn.create();
-        inn.loadSrc();
-        inn.isValid();
-        inn.normalize();
-        inn.isValid();
-        inn.loadToRmis();
 
-        groupBuhUchet.create();
-        groupBuhUchet.loadSrc();
-        groupBuhUchet.isValid();
-        groupBuhUchet.normalize();
-        groupBuhUchet.isValid();
-        groupBuhUchet.loadToRmis();
+        System.out.println(inn.exists());
 
-        ath.create();
-        ath.loadSrc();
-        ath.isValid();
-        ath.normalize();
-        ath.loadToRmis();
-
-        pharmGroup.create();
-        pharmGroup.loadSrc();
-        pharmGroup.isValid();
-        pharmGroup.loadToRmis();
+//        inn.loadSrc();
+//        inn.isValid();
+//        inn.normalize();
+//        inn.isValid();
+//        inn.loadToRmis();
+//
+//        groupBuhUchet.create();
+//        groupBuhUchet.loadSrc();
+//        groupBuhUchet.isValid();
+//        groupBuhUchet.normalize();
+//        groupBuhUchet.isValid();
+//        groupBuhUchet.loadToRmis();
+//
+//        ath.create();
+//        ath.loadSrc();
+//        ath.isValid();
+//        ath.normalize();
+//        ath.loadToRmis();
+//
+//        pharmGroup.create();
+//        pharmGroup.loadSrc();
+//        pharmGroup.isValid();
+//        pharmGroup.loadToRmis();
 
 
     }

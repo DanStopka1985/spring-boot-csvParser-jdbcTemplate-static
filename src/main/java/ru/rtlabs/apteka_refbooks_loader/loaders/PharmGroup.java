@@ -26,31 +26,34 @@ public class PharmGroup {
     @Autowired
     DataSource ds;
 
-    private String PharmGroupPath;
+    private String pharmGroupPath;
     private String createSQLPath;
     private String normilizeSQLPath;
     private String loadToRMISSQLPath;
 
     private Connection con;
 
-    public void create() throws SQLException {
+    public boolean exists() throws SQLException {
         String jarPath = System.getProperty("user.dir");
         String xlsPath = jarPath + "/xls";
         String sqlPath = jarPath + "/sql";
 
-        this.PharmGroupPath = xlsPath + "/pharm_group.xlsx";
+        this.pharmGroupPath = xlsPath + "/pharm_group.xlsx";
         this.createSQLPath = sqlPath + "/pharm_group_src_create.sql";
         this.normilizeSQLPath = sqlPath + "/pharm_group_src_normalize.sql";
         this.loadToRMISSQLPath = sqlPath + "/pharm_group_load_to_rmis.sql";
 
         this.con = ds.getConnection();
+        return (new FileSystemResource(pharmGroupPath)).exists();
+    }
 
+    public void create() throws SQLException {
         ScriptUtils.executeSqlScript(con, new FileSystemResource(createSQLPath));
     }
 
     public void loadSrc() throws IOException, InvalidFormatException, SQLException {
 
-        InputStream inp = new FileInputStream(PharmGroupPath);
+        InputStream inp = new FileInputStream(pharmGroupPath);
         Workbook wb = WorkbookFactory.create(inp);
 
         Sheet sheet = wb.getSheetAt(0);
